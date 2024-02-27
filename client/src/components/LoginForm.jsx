@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
+import UserContext from "./contexts/UserContext";
 
 const LoginForm = () => {
+    const { saveLoggedInUser } = useContext(UserContext)
     // State variables for the form data and for the form errors
   const [formData, setFormData] = useState({
     email: "",
@@ -27,6 +29,7 @@ const handleFormChange = (e) => {
       .then((res) => {
         console.log(res);
         //save the user and redirect !!!
+        saveLoggedInUser(res.data)
         navigate('/dashboard')
       })
       .catch((err) => { // there was a least on validation error

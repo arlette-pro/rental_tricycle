@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import axios from 'axios'
 import { Link, useNavigate } from "react-router-dom"
+import UserContext from './contexts/UserContext'
 
 const RegistrationForm = () => {
+    const { saveLoggedInUser } = useContext(UserContext);
     // state variables for the form data and for the form errors
     const [formData, setFormData] = useState({
         "firstName":"",
@@ -36,6 +38,7 @@ const handleRegistrationSubmit = e => {
         .then(res => {
             console.log(res);
             //Save the newly registered user in state and then redirect!!
+            saveLoggedInUser(res.data)
             navigate('/dashboard'); 
         })
         .catch(err => {
@@ -80,8 +83,8 @@ const handleRegistrationSubmit = e => {
         </div>
         <div>
                 {formDataErrors.confirmedPassword && <p style={{color: "red"}}>{formDataErrors.confirmedPassword }</p>}
-                <label htmlFor="confirmedPassword ">Confirmed password:</label>
-                <input type="password " name="confirmedPassword " value={formData.confirmedPassword } onChange={handleFormChange} />
+                <label htmlFor="confirmedPassword">Confirmed password:</label>
+                <input type="password " name="confirmedPassword" value={formData.confirmedPassword} onChange={handleFormChange} />
                 
         </div>
         <input type="submit" value="Register" />
