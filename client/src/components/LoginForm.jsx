@@ -34,7 +34,7 @@ const handleFormChange = (e) => {
       })
       .catch((err) => { // there was a least on validation error
         // console.log(err);
-        setFormatDataError(err.response.data.message)
+        setFormatDataError(err.response.data.message) // save error in the state
         // display invalid credentials error here!!!
       });
   };
