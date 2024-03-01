@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 require("./config/mongoose.config");
+require("./routes/user.route")(app);
 require("./routes/tricycle.routes")(app)
 
-require("./routes/user.route")(app);
 app.listen(port, () => console.log(`Listening on port ${port}`));

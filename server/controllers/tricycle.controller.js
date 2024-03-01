@@ -1,15 +1,5 @@
 const Tricycle = require('../models/tricycle.models')
-
 module.exports = {
-    allTricycle: (req, res) => {
-        Tricycle.find()
-        .then((allTricycles) => {
-            res.json(allTricycles)
-        })
-        .catch((err) => {
-            res.status(500).json(err)
-        })
-    },
 
     getOneTricycle: (req, res) => {
         Tricycle.findOne({_id: req.params.id})
@@ -43,7 +33,7 @@ module.exports = {
     //delete a tricycle
     deleteTricycle : (req, res) => {
         Tricycle.deleteOne({_id: req.params.id})
-        .then(deleteConfirmation => response.json(deleteConfirmation) )
-        .catch(err = res.json(err))
+        .then(deleteConfirmation => res.json(deleteConfirmation) )
+        .catch(err = res.status(500).json(err))
     }
 }
